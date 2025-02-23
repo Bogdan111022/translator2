@@ -7,6 +7,30 @@ from googletrans import Translator
 
 
 app = QApplication(sys.argv)
+app.setStyleSheet("""
+      QWidget {
+          background: #ffff00;
+      }
+      
+      QPushButton
+      {
+          background-color: #00008b;
+          border-style: outset;
+          font-family: Roboto;
+          font-size: 25xp;
+          min-width: 6em;
+          padding: 6px;
+          color:  yellow
+      }
+      
+      
+      
+      
+""")
+
+
+
+
 window = QWidget()
 translator = Translator()
 
@@ -67,9 +91,9 @@ v_line2.addWidget(combo2)
 v_line2.addWidget(autput_edit)
 
 main_line.addLayout(v_line)
-main_line.addWidget(button)
 main_line.addLayout(v_line2)
 main_line.addWidget(button2)
+main_line.addWidget(button)
 
 def print_text():
    a = input_text.toPlainText()
@@ -77,8 +101,16 @@ def print_text():
    print(f"Original Text: {text_to_translate}")
    print(f"Translated Text: {translated_text.text}")
    autput_edit.setText(translated_text.text)
-button.clicked.connect(print_text)
+def swap():
+   a = autput_edit.toPlainText()
+   b = input_text.toPlainText()
+   autput_edit.setText(b)
+   input_text.setText(a)
 
+
+
+button.clicked.connect(swap)
+button2.clicked.connect((print_text))
 window.setLayout(main_line)
 window.show()
 sys.exit(app.exec_())
